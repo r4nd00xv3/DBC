@@ -1,0 +1,416 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.7
+-- Dumped by pg_dump version 14.7
+
+-- Started on 2023-05-15 17:22:56
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 3359 (class 1262 OID 33478)
+-- Name: labteste; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE labteste WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'Portuguese_Brazil.1252';
+
+
+ALTER DATABASE labteste OWNER TO postgres;
+
+\connect labteste
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 217 (class 1259 OID 33582)
+-- Name: acesso; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.acesso (
+    id bigint NOT NULL,
+    descricao character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.acesso OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 33557)
+-- Name: associado; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.associado (
+    id bigint NOT NULL,
+    nome character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.associado OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 33562)
+-- Name: pauta; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pauta (
+    id bigint NOT NULL,
+    pauta_desc character varying(255) NOT NULL,
+    voto boolean
+);
+
+
+ALTER TABLE public.pauta OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 33567)
+-- Name: pauta_associados; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.pauta_associados (
+    pauta_id bigint,
+    associado_id bigint NOT NULL,
+    maisvotados character varying(255)
+);
+
+
+ALTER TABLE public.pauta_associados OWNER TO postgres;
+
+--
+-- TOC entry 210 (class 1259 OID 33508)
+-- Name: seq_acesso; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.seq_acesso
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.seq_acesso OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 33509)
+-- Name: seq_associado; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.seq_associado
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.seq_associado OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 33510)
+-- Name: seq_pauta; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.seq_pauta
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.seq_pauta OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 33511)
+-- Name: seq_usuario; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.seq_usuario
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.seq_usuario OWNER TO postgres;
+
+--
+-- TOC entry 209 (class 1259 OID 33494)
+-- Name: usuario; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuario (
+    id bigint NOT NULL,
+    login character varying(255) NOT NULL,
+    senha character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.usuario OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 33587)
+-- Name: usuarios_acesso; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.usuarios_acesso (
+    usuario_id bigint NOT NULL,
+    acesso_id bigint NOT NULL
+);
+
+
+ALTER TABLE public.usuarios_acesso OWNER TO postgres;
+
+--
+-- TOC entry 3352 (class 0 OID 33582)
+-- Dependencies: 217
+-- Data for Name: acesso; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3349 (class 0 OID 33557)
+-- Dependencies: 214
+-- Data for Name: associado; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.associado (id, nome) VALUES (1, 'JOAO');
+INSERT INTO public.associado (id, nome) VALUES (2, 'PAULO');
+INSERT INTO public.associado (id, nome) VALUES (3, 'MARCOS');
+INSERT INTO public.associado (id, nome) VALUES (4, 'CARLOS');
+INSERT INTO public.associado (id, nome) VALUES (5, 'PEDRO');
+INSERT INTO public.associado (id, nome) VALUES (9, 'FERNANDO');
+INSERT INTO public.associado (id, nome) VALUES (10, 'LEO');
+INSERT INTO public.associado (id, nome) VALUES (11, 'FERNANDO');
+INSERT INTO public.associado (id, nome) VALUES (12, 'FERNANDO');
+INSERT INTO public.associado (id, nome) VALUES (13, 'FERNANDO');
+INSERT INTO public.associado (id, nome) VALUES (14, 'FERNANDO');
+INSERT INTO public.associado (id, nome) VALUES (15, 'FERNANDO');
+INSERT INTO public.associado (id, nome) VALUES (16, 'FERNANDO');
+INSERT INTO public.associado (id, nome) VALUES (17, 'CONTRA');
+INSERT INTO public.associado (id, nome) VALUES (18, 'CONTRA1');
+INSERT INTO public.associado (id, nome) VALUES (19, 'CONTRA2');
+INSERT INTO public.associado (id, nome) VALUES (20, 'CONTRA3');
+INSERT INTO public.associado (id, nome) VALUES (21, 'CONTRA4');
+INSERT INTO public.associado (id, nome) VALUES (22, 'CONTRA5');
+INSERT INTO public.associado (id, nome) VALUES (23, 'CONTRA6');
+INSERT INTO public.associado (id, nome) VALUES (24, 'CONTRA7');
+INSERT INTO public.associado (id, nome) VALUES (25, 'CONTRA7');
+
+
+--
+-- TOC entry 3350 (class 0 OID 33562)
+-- Dependencies: 215
+-- Data for Name: pauta; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.pauta (id, pauta_desc, voto) VALUES (1, 'PAUTA_X_VERDADE', true);
+INSERT INTO public.pauta (id, pauta_desc, voto) VALUES (2, 'PAUTA_X_FALSA', false);
+INSERT INTO public.pauta (id, pauta_desc, voto) VALUES (3, 'PAUTA_Z_VERDADE', true);
+INSERT INTO public.pauta (id, pauta_desc, voto) VALUES (4, 'PAUTA_Y_FALSO', false);
+
+
+--
+-- TOC entry 3351 (class 0 OID 33567)
+-- Dependencies: 216
+-- Data for Name: pauta_associados; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (1, 1, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (1, 2, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (1, 16, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (3, 17, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (3, 18, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (3, 19, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (3, 20, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (3, 21, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (3, 22, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (3, 23, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (2, 24, NULL);
+INSERT INTO public.pauta_associados (pauta_id, associado_id, maisvotados) VALUES (4, 25, NULL);
+
+
+--
+-- TOC entry 3344 (class 0 OID 33494)
+-- Dependencies: 209
+-- Data for Name: usuario; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.usuario (id, login, senha) VALUES (1, 'admin', '$2a$10$TAUBrkMfqCwUhdJa57LlFu4GhEMGwkWKnswWitLgK/.O72IO3u3Nu');
+
+
+--
+-- TOC entry 3353 (class 0 OID 33587)
+-- Dependencies: 218
+-- Data for Name: usuarios_acesso; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 3360 (class 0 OID 0)
+-- Dependencies: 210
+-- Name: seq_acesso; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.seq_acesso', 1, false);
+
+
+--
+-- TOC entry 3361 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: seq_associado; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.seq_associado', 25, true);
+
+
+--
+-- TOC entry 3362 (class 0 OID 0)
+-- Dependencies: 212
+-- Name: seq_pauta; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.seq_pauta', 1, false);
+
+
+--
+-- TOC entry 3363 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: seq_usuario; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.seq_usuario', 1, false);
+
+
+--
+-- TOC entry 3198 (class 2606 OID 33586)
+-- Name: acesso acesso_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.acesso
+    ADD CONSTRAINT acesso_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3190 (class 2606 OID 33561)
+-- Name: associado associado_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.associado
+    ADD CONSTRAINT associado_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3194 (class 2606 OID 33571)
+-- Name: pauta_associados pauta_associados_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pauta_associados
+    ADD CONSTRAINT pauta_associados_pkey PRIMARY KEY (associado_id);
+
+
+--
+-- TOC entry 3192 (class 2606 OID 33566)
+-- Name: pauta pauta_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pauta
+    ADD CONSTRAINT pauta_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3200 (class 2606 OID 33593)
+-- Name: usuarios_acesso uk_8bak9jswon2id2jbunuqlfl9e; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_acesso
+    ADD CONSTRAINT uk_8bak9jswon2id2jbunuqlfl9e UNIQUE (acesso_id);
+
+
+--
+-- TOC entry 3196 (class 2606 OID 33591)
+-- Name: pauta_associados unique_acesso_user; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pauta_associados
+    ADD CONSTRAINT unique_acesso_user UNIQUE (pauta_id, associado_id);
+
+
+--
+-- TOC entry 3188 (class 2606 OID 33500)
+-- Name: usuario usuario_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuario
+    ADD CONSTRAINT usuario_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3203 (class 2606 OID 33594)
+-- Name: usuarios_acesso acesso_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_acesso
+    ADD CONSTRAINT acesso_fk FOREIGN KEY (acesso_id) REFERENCES public.acesso(id);
+
+
+--
+-- TOC entry 3202 (class 2606 OID 33577)
+-- Name: pauta_associados fk6qg27qgah9hvwut27xxlnh7rh; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pauta_associados
+    ADD CONSTRAINT fk6qg27qgah9hvwut27xxlnh7rh FOREIGN KEY (associado_id) REFERENCES public.associado(id);
+
+
+--
+-- TOC entry 3201 (class 2606 OID 33572)
+-- Name: pauta_associados fk9ssnu5r0l7pwpwt85cpayubfu; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.pauta_associados
+    ADD CONSTRAINT fk9ssnu5r0l7pwpwt85cpayubfu FOREIGN KEY (pauta_id) REFERENCES public.pauta(id);
+
+
+--
+-- TOC entry 3204 (class 2606 OID 33599)
+-- Name: usuarios_acesso usuario_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.usuarios_acesso
+    ADD CONSTRAINT usuario_fk FOREIGN KEY (usuario_id) REFERENCES public.usuario(id);
+
+
+-- Completed on 2023-05-15 17:22:57
+
+--
+-- PostgreSQL database dump complete
+--
+
