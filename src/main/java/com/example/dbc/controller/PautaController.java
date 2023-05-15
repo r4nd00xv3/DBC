@@ -1,6 +1,9 @@
 package com.example.dbc.controller;
 
+import com.example.dbc.model.dto.VotosDTO;
 import com.example.dbc.repository.Pauta;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +28,7 @@ public class PautaController {
 
     }
 
-    @PostMapping(value = "listaTodosAssociadosp")
+    @GetMapping(value = "listaPautas")
     @ResponseBody
     public ResponseEntity<List<com.example.dbc.model.Pauta>> listlic() {
 
@@ -35,7 +38,7 @@ public class PautaController {
 
     }
 
-    @PostMapping(value = "buscaruseridAssociadop/{id}")
+    @PostMapping(value = "buscaruseridPautas/{id}")
     @ResponseBody
     public ResponseEntity<com.example.dbc.model.Pauta> buscarprodid(@PathVariable(name = "id") Long id) { /* Recebe os dados para consultar */
 
@@ -45,7 +48,7 @@ public class PautaController {
 
     }
 
-    @PostMapping(value = "atualizarAssociadop")
+    @PutMapping(value = "atualizarPautas")
     @ResponseBody
     public ResponseEntity<?> atualizar(@RequestBody com.example.dbc.model.Pauta associado) { /* Recebe os dados para salvar */
 
@@ -60,7 +63,7 @@ public class PautaController {
 
 
     @ResponseBody
-    @PostMapping(value = "/deleteAssociadoIdp/{id}")
+    @DeleteMapping(value = "/deletaPautas/{id}")
     public ResponseEntity<?> deleteAcessoPorId(@PathVariable("id") Long id) {
 
         associadorep.deleteById(id);
@@ -68,19 +71,24 @@ public class PautaController {
         return new ResponseEntity("Associado Removida com sucesso!",HttpStatus.OK);
     }
 
-   @PostMapping(value = "buscarPorNomeAssociadop")
+   @PostMapping(value = "buscarPorPautas")
     @ResponseBody
-    public ResponseEntity<List<com.example.dbc.model.Pauta>> buscarPorNomeParceiro(@RequestParam(name = "nomeassociado") String name){
+    public ResponseEntity<List<com.example.dbc.model.Pauta>> buscarPorNomeParceiro(@RequestParam(name = "nomepauta") String name){
 
         List<com.example.dbc.model.Pauta> associados = associadorep.buscPauta(name.trim().toUpperCase());
 
         return new ResponseEntity<List<com.example.dbc.model.Pauta>>(associados, HttpStatus.OK);
 
     }
-    @GetMapping("/consulta")
-    public List<Object> fazerConsultaComAlias() {
-        return associadorep.Search();
-    }
+    @GetMapping("/listaVotos")
 
-        }
+    public String getObj() throws JsonProcessingException{
+         List<Object> votosDTOList = associadorep.Search() ;
+
+        ObjectMapper mapper = new ObjectMapper();
+        String json = mapper.writeValueAsString(votosDTOList);
+
+
+        return json;
+    }}
 
