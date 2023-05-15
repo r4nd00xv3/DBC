@@ -28,9 +28,9 @@ public class PautaController {
     @ResponseBody
     public ResponseEntity<com.example.dbc.model.Pauta> salvar(@RequestBody com.example.dbc.model.Pauta associado) { /* Recebe os dados para salvar */
 
-        com.example.dbc.model.Pauta associado1 = associadorep.save(associado);
+      com.example.dbc.model.Pauta pauta = associadorep.save(associado);
 
-        return new ResponseEntity<com.example.dbc.model.Pauta>(associado1, HttpStatus.CREATED);
+        return new ResponseEntity<com.example.dbc.model.Pauta>(pauta, HttpStatus.CREATED);
 
     }
 
@@ -44,7 +44,7 @@ public class PautaController {
 
     }
 
-    @PostMapping(value = "buscaruseridPautas/{id}")
+    @GetMapping(value = "buscaruseridPautas/{id}")
     @ResponseBody
     public ResponseEntity<com.example.dbc.model.Pauta> buscarprodid(@PathVariable(name = "id") Long id) { /* Recebe os dados para consultar */
 
