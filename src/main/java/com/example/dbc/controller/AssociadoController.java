@@ -25,7 +25,7 @@ public class AssociadoController {
 
     }
 
-    @PostMapping(value = "listaTodosAssociados")
+    @GetMapping(value = "listaTodosAssociados")
     @ResponseBody
     public ResponseEntity<List<com.example.dbc.model.Associado>> listlic() {
 
@@ -35,7 +35,7 @@ public class AssociadoController {
 
     }
 
-    @PostMapping(value = "buscaruseridAssociado/{id}")
+    @GetMapping(value = "buscaruseridAssociado/{id}")
     @ResponseBody
     public ResponseEntity<com.example.dbc.model.Associado> buscarprodid(@PathVariable(name = "id") Long id) { /* Recebe os dados para consultar */
 
@@ -45,7 +45,7 @@ public class AssociadoController {
 
     }
 
-    @PostMapping(value = "atualizarAssociado")
+    @PutMapping(value = "atualizarAssociado")
     @ResponseBody
     public ResponseEntity<?> atualizar(@RequestBody com.example.dbc.model.Associado associado) { /* Recebe os dados para salvar */
 
@@ -60,7 +60,7 @@ public class AssociadoController {
 
 
     @ResponseBody
-    @PostMapping(value = "/deleteAssociadoId/{id}")
+    @DeleteMapping(value = "/deleteAssociadoId/{id}")
     public ResponseEntity<?> deleteAcessoPorId(@PathVariable("id") Long id) {
 
         associadorep.deleteById(id);
