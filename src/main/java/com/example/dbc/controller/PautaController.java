@@ -1,7 +1,9 @@
 package com.example.dbc.controller;
 
+import com.example.dbc.model.dto.CpfDTO;
 import com.example.dbc.model.dto.VotosDTO;
 import com.example.dbc.repository.Pauta;
+import com.example.dbc.service.CpfService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -17,6 +20,9 @@ import java.util.List;
 public class PautaController {
     @Autowired
     private Pauta associadorep;
+
+   @Autowired
+   private CpfService cpfService;
 
     @PostMapping(value = "salvarPautas")
     @ResponseBody
@@ -90,5 +96,12 @@ public class PautaController {
 
 
         return json;
-    }}
+    }
 
+    @ResponseBody
+    @GetMapping(value = "/consultaCpf/{cpf}")
+    public ResponseEntity<CpfDTO> consultaCep(@Valid  @PathVariable("cpf") String cpf){
+
+   return new ResponseEntity<CpfDTO>((CpfDTO) cpfService.consultaCpf(cpf), HttpStatus.OK);
+
+    }}
